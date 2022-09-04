@@ -1,4 +1,4 @@
-package output;
+package javaBasic.step1_output;
 
 public class Ex04 {
 
