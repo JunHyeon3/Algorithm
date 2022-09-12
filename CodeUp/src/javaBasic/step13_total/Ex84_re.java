@@ -1,7 +1,8 @@
 package javaBasic.step13_total;
-import java.util.Scanner;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
 // 빛 섞어 색 만들기빛 섞어 색 만들기
@@ -12,25 +13,31 @@ import java.io.OutputStreamWriter;
 public class Ex84_re {
   
   public static void main(String[] args) throws IOException {
-    Scanner sc = new Scanner(System.in);
-//    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-    
-    int r = sc.nextInt();
-    int g = sc.nextInt();
-    int b = sc.nextInt();
-    
-    for(int i=0; i<r; i++) {
-      for(int j=0; j<g; j++) {
-        for(int k=0; k<b; k++) {
-//        bw.write(i);
-          System.out.printf("%d %d %d\n", i, j, k);
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    String data[] = br.readLine().split(" ");
+    int count = 0;
+
+    int r = Integer.parseInt(data[0]);
+    int g = Integer.parseInt(data[1]);
+    int b = Integer.parseInt(data[2]);
+
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+    for (int i=0; i<r; i++) {
+      for (int j=0; j<g; j++) {
+        for (int k=0; k<b; k++) {
+          bw.write(i + " " + j + " " + k + "\n");
+          count ++;
         }
       }
     }
-    
-    System.out.printf("%d", r*g*b);
-    
-    sc.close();    
+    bw.write(String.valueOf(count));
+    bw.flush();
   }
   
 }
+
+//일반적인 방법으로 for문을 3개 사용하여 시간초과가 발생하였다.
+//이를 해결하기 위해 scanner와 println보다 성는이 좋은
+//BufferedReader와 BufferedWriter에 대해 공부하여 시간초과 오류를 해결함
