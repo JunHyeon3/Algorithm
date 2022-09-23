@@ -11,6 +11,9 @@ import java.util.StringTokenizer;
 // 출력 : 배열 A에 K 번째 저장 되는 수를 출력한다. 저장 횟수가 K 보다 작으면 -1을 출력한다.
 public class P04_24060_TO {
   
+  // 임시로 사용하는 tmp 배열을 재귀함수안에서 선언하여 시간이 낭비되었다.
+  // 배열을 전역변수로 선언하고 main에서 merge_sort를 호출하기전에 객체를 생성하여 시간초과 문제를 해결하였다.
+  static int[] A, tmp;
   static int K;  
   static int count = 0;  
   static int result = -1;  
@@ -24,12 +27,15 @@ public class P04_24060_TO {
       int N = Integer.parseInt(st.nextToken());
       K = Integer.parseInt(st.nextToken());
       
-      int[] A = new int[N];
+      A = new int[N];
       
       st = new StringTokenizer(br.readLine());
+      
       for(int i=0; i<N; i++) {
           A[i] = Integer.parseInt(st.nextToken());
       }
+      
+      tmp = new int[N];
       
       merge_sort(A, 0, A.length-1);
       
@@ -54,7 +60,6 @@ public class P04_24060_TO {
   public static void merge(int arr[], int left, int right) {
       int l, r, k, a;
       int m = (left + right) / 2;
-      int[] tmp = new int[arr.length];
       
       l = left;
       r = m + 1;
@@ -79,7 +84,7 @@ public class P04_24060_TO {
           count++;
           if(count == K) {
               result = tmp[a];
-              break;
+              return;
           }
           arr[a] = tmp[a];
       }
